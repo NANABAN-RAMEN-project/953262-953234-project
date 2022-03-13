@@ -4,6 +4,11 @@ html,body {
     box-sizing: border-box;
     overflow-x:hidden;
 }
+.container-body {
+    padding-bottom: 150px;
+    padding-left: 15%;
+    padding-right: 15%;
+}
 p {
     font-family: 'Roboto', sans-serif;
     font-size: 14px;

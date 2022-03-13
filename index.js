@@ -16,6 +16,10 @@ app.get("/", function(req,res){
   res.render('home',{page_indicate:page_indicate[0]});
 })
 
+app.get("/select-table", function(req,res){
+  res.render('select-table',{page_indicate:page_indicate[1]});
+
+})
     
 app.listen(3000, function() {
     console.log("Server started on port 3000");
