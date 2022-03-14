@@ -5,7 +5,7 @@ const { redirect } = require("express/lib/response");
 const res = require("express/lib/response");
 const _ = require('lodash');
 
-const page_indicate = ["","SELECT TABLE:","ORDER ONLINE:","ORDER STATUS:"];
+const page_indicate = ["","SELECT TABLE:","ORDER ONLINE:","ORDER STATUS:","KITCHEN STAFF","ORDER LIST:"];
 const Product = require('./model/products');
 const Table = require('./model/table_num');
 
@@ -72,6 +72,11 @@ app.post("/delete-order", function(req,res){
   Table.delete(productId,currentTable);
   res.redirect('/order-status');
 })    
+
+//Kitchen UI.
+app.get("/kitchen",function(req,res){
+  res.render('kitchen-authen',{page_indicate:page_indicate[4]});
+})
     
 app.listen(3000, function() {
     console.log("Server started on port 3000");
