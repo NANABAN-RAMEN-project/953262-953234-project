@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<body>
+    <%- include('partials/header')%>
+    
+    <div class="container-body">
+        <div class="row">
+            
+            <div class="col-lg-3 col-sm-12">
+                <div>
+                    <p style="left: 0; top: 10px; font-size: 3rem; font-family: 'ReklameScriptW00-Bold', sans-serif; font-weight: bold; color: black;">Welcome Table <%=currentTable%></p>
+                </div>
+                <!--Search bar-->
+                <div>
+                    <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for menu..." title="Type in a name">
+                </div>
+
+                <div style=" left: 0; ">
+                    <a href="/appetizers"><button class="menu-button">APPETIZERS</button></a>
+                    <a href="/main"><button class="menu-button">MAIN DISH</button></a>
+                    <a href="/beverage"><button class="menu-button">BEVERAGE</button></a>
+                </div>
+            </div>
+          
+            <div class="col-lg-6 col-sm-12" style="margin-bottom: 20px;">
+                <div class="row">
+                   <% for(let p of products) {%> 
+                        <div class="col-lg-6 col-sm-12 my-auto">
+                            <div class="card-box h-100" id="items">
+                                <a><img class="card-img" src="<%= p.imageURL%>" alt="food-image"></a>
+                                <div class="row">
+                                    <div class="col-lg-9 col-md-6" style="text-align: left;">
+                                        <p id="title"><%= p.title%></p>
+                                        <p><%= p.price%> $</p>
+                                        <p><%= p.description%></p>
+                                    </div>
+                                    <div class="col-lg-3 col-md-6">
+                                        <form action="/add-to-cart" method="POST">
+                                            <input type="hidden" name="id" value="<%=p.id%>">
+                                            <button style="width: 100%; text-align: center; color: black; background-color: transparent; border: 0; font-size: 20px; font-weight: bold;">+</button>
+                                        </form> 
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <%  
+                    }
+                    %> 
+                </div>
+            </div>
+
+            <div class="col-lg-3 col-sm-12">
+                <div>
+                    <p style="left: 1rem; top: 10px; font-size: 3rem; font-family: 'ReklameScriptW00-Bold', sans-serif; font-weight: bold; color: black;">My Order(s): </p>
+                </div>
+                <div style="left: 1rem; top: 6rem;">
+                    <% if(table.products.length == 0){%>
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Title</th>
+                                    <th scope="col">Price</th>
+                                    <th scope="col">Quantity</th>
+                                    <th scope="col"></th> 
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td colspan="4" style="text-align:center;">THERE ARE NO ITEMS IN LIST...</td>
+                                </tr>
+                                <td colspan="4">                   
+                                        <button disabled style="text-align: center; width: 100%; font-family: 'Roboto', sans-serif; font-weight: bold; color: darkgray; background-color: lightgray;">ORDER</button>                
+                                </td>
+                            </tbody>
+                        </table>
+                        <%} else {%>
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">Title</th>
+                                        <th scope="col">Price</th>
+                                        <th scope="col">Quantity</th>
+                                        <th scope="col"></th> 
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <% table.products.forEach(product => {%>
+                                        <form action="/delete-cart" method="post">
+                                        <tr>
+                                            <td scope="row">
+                                                <%= product.product.title%>
+                                            </td>
+                                            <td>
+                                                <%= product.product.price%> $
+                                            </td>
+                                            <td>
+                                                <%= product.qty%>
+                                            </td>
+                                            <td>
+                                                <button type="submit" name="id" value="<%=product.product.id%>" style="width: 100%; text-align: center; color: black; background-color: transparent; border: 0; font-size: 20px; font-weight: bold;">-</button>
+                                            </td>
+                                        </tr>
+                                        </form>
+                                    <%})%>
+                                        <tr>
+                                            <td>Total Price: </td>
+                                            <td colspan="1">
+                                                <%= table.totalPrice%> $   
+                                            </td>
+                                        </tr>
+                                        <td colspan="4">                   
+                                            <a href="order-status"><button type="submit" style="text-align: center; width: 100%; font-family: 'Roboto', sans-serif; font-weight: bold;">ORDER NOW ></button></a>              
+                                        </td>
+                                </tbody>
+                            </table>
+                        <%}%>
+                        <br>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function myFunction(){
+            var input, filter, p1, i, div1, div2;
+            input = document.getElementById("myInput");
+            filter = input.value.toUpperCase();
+            div1 = document.getElementById("items");
+            div2 = div1.getElementsByTagName("p");
+            for(i=0;i<p.length;i++){
+                p1 = div2[i].getElementById("title")[0];
+                if(p1.innerHTML.toUpperCase().indexOf(filter)>-1){
+                    div2[i].style.display = "";
+                }
+                else{
+                    div2[i].style.display = "none";
+                }
+            }
+        }
+    </script>
+    
+    <%- include('partials/footer')%>
+
+    
+
+</body>
+</html>
