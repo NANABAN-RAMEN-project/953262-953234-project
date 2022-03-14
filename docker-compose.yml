@@ -1,8 +1,8 @@
 version: '3'
 services:
   app:
-    container_name: nanaban
+    container_name: final_project
     restart: always
-    image:  panadon/nanaban:latest
+    image:  panadon/final_project:latest
     ports:
       - "8081:8080"
