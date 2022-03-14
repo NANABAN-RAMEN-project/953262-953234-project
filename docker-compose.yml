@@ -34,6 +34,7 @@ jobs:
           context: .
           push: true
           tags: panadon/nanaban:latest
+      -
         name: prepare the docker-compose run
         run: |
               mkdir panadon/nanaban
