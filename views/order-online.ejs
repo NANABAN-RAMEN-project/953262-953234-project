@@ -61,15 +61,14 @@
                                     <th scope="col">Title</th>
                                     <th scope="col">Price</th>
                                     <th scope="col">Quantity</th>
-                                    <th scope="col">Status</th>
                                     <th scope="col"></th> 
                                 </tr>
                             </thead>
                             <tbody>
                                 <tr>
-                                    <td colspan="5" style="text-align:center;">THERE ARE NO ITEMS IN LIST...</td>
+                                    <td colspan="4" style="text-align:center;">THERE ARE NO ITEMS IN LIST...</td>
                                 </tr>
-                                <td colspan="5">                   
+                                <td colspan="4">                   
                                         <button disabled style="text-align: center; width: 100%; font-family: 'Roboto', sans-serif; font-weight: bold; color: darkgray; background-color: lightgray;">ORDER</button>                
                                 </td>
                             </tbody>
@@ -81,7 +80,6 @@
                                         <th scope="col">Title</th>
                                         <th scope="col">Price</th>
                                         <th scope="col">Quantity</th>
-                                        <th scope="col">Status</th>
                                         <th scope="col"></th> 
                                     </tr>
                                 </thead>
@@ -99,9 +97,6 @@
                                                 <%= product.qty%>
                                             </td>
                                             <td>
-                                                <%= product.status%>
-                                            </td>
-                                            <td>
                                                 <button type="submit" name="id" value="<%=product.product.id%>" style="width: 100%; text-align: center; color: black; background-color: transparent; border: 0; font-size: 20px; font-weight: bold;">-</button>
                                             </td>
                                         </tr>
@@ -113,10 +108,8 @@
                                                 <%= table.totalPrice%> $   
                                             </td>
                                         </tr>
-                                        <td colspan="5">                   
-                                            <form action="/add-to-order" method="POST">
-                                                <button type="submit" style="text-align: center; width: 100%; font-family: 'Roboto', sans-serif; font-weight: bold;">ORDER</button>
-                                            </form>                
+                                        <td colspan="4">                   
+                                            <a href="order-status"><button type="submit" style="text-align: center; width: 100%; font-family: 'Roboto', sans-serif; font-weight: bold;">ORDER NOW ></button></a>              
                                         </td>
                                 </tbody>
                             </table>

@@ -61,6 +61,17 @@ app.post("/delete-cart", function(req,res){
   Table.delete(productId,currentTable);
   res.redirect('/order-online');
 })
+
+//Add to Order.
+app.get("/order-status", function(req,res){
+  const table = Table.getTableById(currentTable);
+  res.render('order-status',{page_indicate:page_indicate[3],table:table[0]});
+})
+app.post("/delete-order", function(req,res){
+  const productId = req.body.id;
+  Table.delete(productId,currentTable);
+  res.redirect('/order-status');
+})    
     
 app.listen(3000, function() {
     console.log("Server started on port 3000");

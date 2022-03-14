@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<body>
+    <%- include('partials/header')%>
+    <div class="container">
+        <div class="row">
+            <div style="margin-left: 15px;">
+               <button onClick="location.href='/order-status'" style="background-color: red;"><span class="glyphicon glyphicon-refresh" style="color: white;"></span></button> 
+            </div>
+            <div class="col-sm-12" style="margin-top: 20px;">
+                    <% if(table.products.length !== 0){%>
+                                <table class="table" id="status">
+                                    <thead>
+                                        <tr style="background-color: red; color: white;">
+                                            <th scope="col">Title</th>
+                                            <th scope="col">Price</th>
+                                            <th scope="col">Quantity</th>
+                                            <th scope="col">Status</th>
+                                            <th scope="col"></th> 
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <% table.products.forEach(product => {%>
+                                            <form action="/delete-order" method="post">
+                                            <tr>
+                                                <td>
+                                                    <%= product.product.title%>
+                                                </td>
+                                                <td>
+                                                    <%= product.product.price%> $
+                                                </td>
+                                                <td>
+                                                    <%= product.qty%>
+                                                </td>
+                                                <td>
+                                                    <%= product.status%>
+                                                </td>
+                                                <td>
+                                                    <button type="submit" name="id" value="<%=product.product.id%>" style="width: 100%; text-align: center; color: black; background-color: transparent; border: 0; font-size: 20px; font-weight: bold;">-</button>
+                                                </td>
+                                            </tr>
+                                            </form>
+                                            <% }) %>
+                                            <tr>
+                                                <td>Total Price: </td>
+                                                <td colspan="1">
+                                                    <%= table.totalPrice%> $   
+                                                </td>
+                                            </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+        
+                    <% } %>
+            </div>
+        </div>
+        <div class="row" style="margin-left: 15%; margin-right: 15%;">
+            <div class="col-sm-6 col-md-6 ">
+                <a href="order-online"><button class="status-button">BACK</button></a>
+            </div>
+            <div class="col-sm-6 col-md-6 ">
+                <form action="/" method="post">
+                    <button class="status-button">CHECKOUT</button>
+                </form>
+                
+            </div>
+        </div>
+    </div>
+   
+    <%- include('partials/footer')%>
+</body>
+</html>
