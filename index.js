@@ -77,6 +77,21 @@ app.post("/delete-order", function(req,res){
 app.get("/kitchen",function(req,res){
   res.render('kitchen-authen',{page_indicate:page_indicate[4]});
 })
+app.get("/kitchen-table",function(req,res){
+  const tables = Table.getAllTable();
+  res.render('kitchen-table',{page_indicate:page_indicate[5],tables:tables});
+})
+app.post("/statusChange",function(req,res){
+  const productId = req.body.id;
+  const table_num = req.body.table_no;
+  const newStatus = req.body.status;
+  Table.updateStatus(productId,table_num,newStatus);
+  res.redirect('/kitchen-table');
+})
+app.post("/",function(req,res){
+  Table.clearTable(currentTable);
+  res.redirect('/');
+})
     
 app.listen(3000, function() {
     console.log("Server started on port 3000");

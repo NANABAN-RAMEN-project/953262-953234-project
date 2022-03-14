@@ -69,6 +69,17 @@ class Table {
         }
         
     }
+    
+    static getAllTable() {
+        return table;
+    }
+    
+    static clearTable(tableNumber){
+        var targetTable = table.filter(t => t.t_no == tableNumber);
+            targetTable[0].products = [];
+            targetTable[0].totalPrice = 0;
+        
+    }
     static getTableById(tableNumber) {
         return table.filter(t => t.t_no == tableNumber);
     }
@@ -85,6 +96,14 @@ class Table {
             }
         }
         
+    }
+    static updateStatus(productID, tableNumber, newStatus) {
+        const targetTable = table.filter(t => t.t_no == tableNumber);
+        for (let i = 0; i < targetTable[0].products.length; i++) {
+            if (targetTable[0].products[i].product.id == productID) {
+                targetTable[0].products[i].status = newStatus;
+            }
+        }
     }
 }
 module.exports = Table;
