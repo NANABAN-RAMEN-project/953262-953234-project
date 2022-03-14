@@ -8,6 +8,7 @@ const _ = require('lodash');
 const page_indicate = ["","SELECT TABLE:","ORDER ONLINE:","ORDER STATUS:","KITCHEN STAFF","ORDER LIST:"];
 const Product = require('./model/products');
 const Table = require('./model/table_num');
+const host = '0.0.0.0';
 
 const app = express();
 app.set('view engine', 'ejs');
@@ -93,6 +94,6 @@ app.post("/",function(req,res){
   res.redirect('/');
 })
     
-app.listen(3000, function() {
+app.listen(3000, host, function() {
     console.log("Server started on port 3000");
   });

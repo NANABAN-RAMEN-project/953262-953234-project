@@ -4,5 +4,6 @@ services:
     container_name: final_project
     restart: always
     image:  panadon/final_project:latest
+    build: .
     ports:
-      - "8081:3000"
+      - "8080:3000"
